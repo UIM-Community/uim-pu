@@ -1,0 +1,27 @@
+{
+  "name": "uim_node_pu",
+  "version": "1.0.0",
+  "description": "CA UIM - Node.js Probe Utility",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UIM-Community/uim_node_pu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UIM-Community/uim_node_pu/issues"
+  },
+  "homepage": "https://github.com/UIM-Community/uim_node_pu#readme",
+  "dependencies": {
+    "execa": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.18",
+    "eslint": "^5.12.1"
+  }
+}
