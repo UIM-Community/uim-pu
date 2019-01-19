@@ -13,15 +13,15 @@ CA UIM - Node.js Probe Utility interface.
 This package is available in the Node Package Repository and can be easily installed with [npm](https://docs.npmjs.com/getting-started/what-is-npm) or [yarn](https://yarnpkg.com).
 
 ```bash
-$ npm i uim_node_pu
+$ npm i @uim/pu
 # or
-$ yarn add uim_node_pu
+$ yarn add @uim/pu
 ```
 
 ## Usage example
 
 ```js
-const { pu, PDS_VOID } = require("uim_node_pu");
+const { pu, PDS_VOID } = require("@uim/pu");
 
 async function main() {
     const nimSoft = pu({
