@@ -10,6 +10,12 @@ const ADDR_SEP = "/";
 const PDS_VOID = "''";
 const DEFAULT_CMD_TIMEOUT_MS = 2000;
 const PDS_REGEX = /([a-zA-Z0-9_-]+)\s+(PDS_PCH|PDS_I|PDS_PDS|PDS_PPDS)\s+[0-9]+\s?(.*)/gm;
+const PDS = {
+    INT: "PDS_I",
+    STRING: "PDS_PCH",
+    ARRAY: "PDS_PPDS",
+    HASH: "PDS_PDS"
+};
 
 /**
  * @func parsePUStdout
@@ -25,8 +31,8 @@ function parsePUStdout(str) {
     while ((result = PDS_REGEX.exec(str)) !== null) {
         const [, varName, varType, varValue] = result;
 
-        if (varType === "PDS_PCH" || varType === "PDS_I") {
-            const convertedValue = varType === "PDS_I" ? Number(varValue) : varValue;
+        if (varType === PDS.STRING || varType === PDS.INT) {
+            const convertedValue = varType === PDS.INT ? Number(varValue) : varValue;
             if (CurrentPDS === null) {
                 parseMap[varName] = convertedValue;
             }
@@ -37,11 +43,11 @@ function parsePUStdout(str) {
                 parseMap[PPDSName][CurrentPDS][varName] = convertedValue;
             }
         }
-        else if (varType === "PDS_PPDS") {
+        else if (varType === PDS.ARRAY) {
             PPDSName = varName;
             parseMap[varName] = [];
         }
-        else if (varType === "PDS_PDS") {
+        else if (varType === PDS.HASH) {
             CurrentPDS = varName;
             if (PPDSName === null) {
                 parseMap[varName] = Object.create(null);
