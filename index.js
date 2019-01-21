@@ -13,49 +13,45 @@ const PDS_REGEX = /([a-zA-Z0-9_-]+)\s+(PDS_PCH|PDS_I|PDS_PDS|PDS_PPDS)\s+[0-9]+\
 
 /**
  * @func parsePUStdout
- * @param {!String} str
+ * @param {!String} str PU stdout string
  * @returns {Map<String, any>}
  */
 function parsePUStdout(str) {
     const parseMap = Object.create(null);
     let result;
-    let PPDS_Name = null
+    let PPDSName = null;
     let CurrentPDS = null;
 
-    while((result = PDS_REGEX.exec(str)) !== null) {
+    while ((result = PDS_REGEX.exec(str)) !== null) {
         const [, varName, varType, varValue] = result;
-    
-        if(varType === "PDS_PCH" || varType === "PDS_I") {
-            const convertedValue = (varType === "PDS_I") ? Number(varValue) : varValue;
-            if(CurrentPDS !== null) {
-                if(PPDS_Name !== null) {
-                    parseMap[PPDS_Name][CurrentPDS][varName] = convertedValue;
-                }
-                else {
-                    parseMap[CurrentPDS][varName] = convertedValue;
-                }
-            }
-            else {
+
+        if (varType === "PDS_PCH" || varType === "PDS_I") {
+            const convertedValue = varType === "PDS_I" ? Number(varValue) : varValue;
+            if (CurrentPDS === null) {
                 parseMap[varName] = convertedValue;
             }
-        }
-        else if(varType === "PDS_PPDS") {
-            PPDS_Name = varName;
-            parseMap[varName] = [];
-        }
-        else if(varType === "PDS_PDS") {
-            CurrentPDS = varName;
-            if(PPDS_Name === null) {
-                parseMap[varName] = Object.create(null);
+            else if (PPDSName === null) {
+                parseMap[CurrentPDS][varName] = convertedValue;
             }
             else {
-                if(/^\d+$/.test(CurrentPDS)) {
-                    parseMap[PPDS_Name][varName] = {};
-                }
-                else {
-                    PPDS_Name = null;
-                    parseMap[varName] = Object.create(null);
-                }
+                parseMap[PPDSName][CurrentPDS][varName] = convertedValue;
+            }
+        }
+        else if (varType === "PDS_PPDS") {
+            PPDSName = varName;
+            parseMap[varName] = [];
+        }
+        else if (varType === "PDS_PDS") {
+            CurrentPDS = varName;
+            if (PPDSName === null) {
+                parseMap[varName] = Object.create(null);
+            }
+            else if (/^\d+$/.test(CurrentPDS)) {
+                parseMap[PPDSName][varName] = Object.create(null);
+            }
+            else {
+                PPDSName = null;
+                parseMap[varName] = Object.create(null);
             }
         }
     }
@@ -65,9 +61,9 @@ function parsePUStdout(str) {
 
 /**
  * @function pu
- * @param {*} options
+ * @param {*} options options
  * @returns {*}
- * 
+ *
  * @throws {TypeError}
  */
 function pu(options = Object.create(null)) {
@@ -93,7 +89,7 @@ function pu(options = Object.create(null)) {
         const callback = sRet.pop();
         const addr = sRet.length === 0 ? "hub" : sRet.join(ADDR_SEP);
 
-        // Create ProbeUtility command
+        // eslint-disable-next-line
         const cmd = NIM_CMD({ login, password, path, addr, callback }).concat(args.join(" "));
         if (debug) {
             console.log(`cmd => ${cmd}`);
@@ -113,7 +109,7 @@ function pu(options = Object.create(null)) {
 
             throw new Error(reason);
         }
-    }
+    };
 }
 
 module.exports = { pu, PDS_VOID };

@@ -12,10 +12,10 @@
     "url": "git+https://github.com/UIM-Community/uim_node_pu.git"
   },
   "keywords": [
-      "CA",
-      "UIM",
-      "ProbeUtility",
-      "pu"
+    "CA",
+    "UIM",
+    "ProbeUtility",
+    "pu"
   ],
   "author": "Asynchronous SASU <gentilhomme.thomas@gmail.com>",
   "license": "MIT",
@@ -27,6 +27,7 @@
     "execa": "^1.0.0"
   },
   "devDependencies": {
+    "@slimio/eslint-config": "^2.0.3",
     "@types/node": "^10.12.18",
     "eslint": "^5.12.1"
   }
