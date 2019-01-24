@@ -1,9 +1,4 @@
-declare class NimAddr implements ProbeUtility.AddrMembers {
-    constructor(addr: string, baseAddr?: string | NimAddr);
 
-    static parse(nimAddr: string): ProbeUtility.AddrMembers;
-    toString(): string;
-}
 
 declare namespace ProbeUtility {
     interface AddrMembers {
@@ -22,10 +17,16 @@ declare namespace ProbeUtility {
         timeout?: number;
     }
 
+    export declare class NimAddr extends AddrMembers {
+        constructor(addr: string, baseAddr?: string | NimAddr);
+
+        static parse(nimAddr: string): AddrMembers;
+        toString(): string;
+    }
+
     type Request = (fullAddr: string, args?: (string | number)[]) => any;
 
     export const PDS_VOID: string;
-    export const NimAddr: typeof NimAddr;
     export function pu(options: PUOptions): Request;
 }
 
