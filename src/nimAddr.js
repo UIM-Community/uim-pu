@@ -70,7 +70,7 @@ class NimAddr {
      * @returns {String}
      */
     toString() {
-        return [this.domain, this.hub, this.robot, this.probe].filter((row) => row !== null).join("/");
+        return [this.domain, this.hub, this.robot, this.probe].filter((row) => typeof row === "string").join("/");
     }
 }
 
