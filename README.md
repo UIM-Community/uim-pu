@@ -1,7 +1,7 @@
 # Node Probe Utility
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/UIM-Community/uim_node_pu/commit-activity)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/SlimIO/Config/blob/master/LICENSE)
-![V1.0](https://img.shields.io/badge/version-1.1.1-blue.svg)
+![V1.0](https://img.shields.io/badge/version-1.1.2-blue.svg)
 ![1DEP](https://img.shields.io/badge/Dependencies-1-yellow.svg)
 
 CA UIM - Node.js Probe Utility interface.

@@ -1,6 +1,6 @@
 {
   "name": "@uim/pu",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "CA UIM - Node.js Probe Utility",
   "main": "index.js",
   "private": false,
