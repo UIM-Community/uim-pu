@@ -1,10 +1,10 @@
-// 3 entry => NimAddr
-// 1 entry => callback name
-// 2 entry => probe/callback
-
 // CONSTANTS
-const ADDR_TYPES = {
-
+const DEFAULT_PROP = {
+    callback: null,
+    probe: null,
+    domain: null,
+    hub: null,
+    robot: null
 };
 
 /**
@@ -15,10 +15,29 @@ class NimAddr {
      * @static
      * @method parse
      * @memberof NimAddr#
+     * @param {!String} nimAddr Nimsoft Addr
      * @returns {void}
      */
-    static parse() {
-        // Parse here!
+    static parse(nimAddr) {
+        if (typeof nimAddr !== "string") {
+            nimAddr = String(nimAddr);
+        }
+
+        const pRet = nimAddr.split(/[/.]+/);
+        switch (pRet.length) {
+            case 1:
+                return { callback: pRet[0] };
+            case 2:
+                return { probe: pRet[0], callback: pRet[1] };
+            case 3:
+                return { domain: pRet[0], hub: pRet[1], robot: pRet[2] };
+            case 4:
+                return { domain: pRet[0], hub: pRet[1], robot: pRet[2], probe: pRet[3] };
+            case 5:
+                return { domain: pRet[0], hub: pRet[1], robot: pRet[2], probe: pRet[3], callback: pRet[4] };
+            default:
+                throw new Error("Invalid Addr length!");
+        }
     }
 
     /**
@@ -34,12 +53,24 @@ class NimAddr {
         }
 
         if (typeof baseAddr === "string") {
-            // eslint-disable-next-line
             baseAddr = new NimAddr(baseAddr);
         }
+
         if (baseAddr instanceof NimAddr) {
-            // Merge baseAddr to this
+            Object.assign(this, NimAddr.parse(addr), baseAddr, Object.create(DEFAULT_PROP));
         }
+        else {
+            Object.assign(this, NimAddr.parse(addr), Object.create(DEFAULT_PROP));
+        }
+    }
+
+    /**
+     * @method toString
+     * @memberof NimAddr#
+     * @returns {String}
+     */
+    toString() {
+        return [this.domain, this.hub, this.robot, this.probe, this.callback].filter((row) => row !== null).join("/");
     }
 }
 

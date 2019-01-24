@@ -3,6 +3,7 @@ const execa = require("execa");
 
 // Require Internal Dependencies
 const { taggedString } = require("./src/utils");
+const { NimAddr } = require("./src/nimAddr");
 
 // CONSTANTS
 const NIM_CMD = taggedString`${"path"} -u ${"login"} -p '${"password"}' ${"addr"} ${"callback"} `;
@@ -118,4 +119,4 @@ function pu(options = Object.create(null)) {
     };
 }
 
-module.exports = { pu, PDS_VOID };
+module.exports = { pu, PDS_VOID, NimAddr };
