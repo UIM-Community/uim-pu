@@ -92,9 +92,17 @@ function pu(options = Object.create(null)) {
     }
 
     return async(fullAddr, args = []) => {
-        const sRet = fullAddr.split(ADDR_SEP);
-        const callback = sRet.pop();
-        const addr = sRet.length === 0 ? "hub" : sRet.join(ADDR_SEP);
+        let addr;
+        let callback;
+        if (fullAddr instanceof NimAddr) {
+            addr = fullAddr.toString();
+            callback = fullAddr.callback;
+        }
+        else {
+            const sRet = fullAddr.split(ADDR_SEP);
+            callback = sRet.pop();
+            addr = sRet.length === 0 ? "hub" : sRet.join(ADDR_SEP);
+        }
 
         // eslint-disable-next-line
         const cmd = NIM_CMD({ login, password, path, addr, callback }).concat(args.join(" "));
