@@ -55,15 +55,29 @@ interface PUOptions {
 }
 ```
 
-### ProbeUtility.Request(fullAddr: string, args?: (string | number)[]): any
+### ProbeUtility.Request(fullAddr: string | NimAddr, args?: (string | number)[]): any
 Send a new request to Probe Utility. fullAddr can be callback name or the full NimSoft ADDR, ex:
 ```
 hub/getrobots
 domain/hub/robot/hub/getrobots
 ```
 
-## Roadmap 1.1
-- Implement a NimAddr class
+### NimAddr
+NimAddr is a class implementation to build NimSoft Addr.
+
+```js
+const { NimAddr } = require("@uim/pu");
+
+const DEFAULT_ADDR = new NimAddr("domain/hub/robotname");
+const test = new NimAddr("controller/get_info", DEFAULT_ADDR);
+console.log(test.toString()); // domain/hub/robotname/controller
+console.log(test.callback); // get_info
+```
+
+The implementation support `/` and `.` seperator. Example:
+```js
+const DEFAULT_ADDR = new NimAddr("domain.hub.robotname");
+```
 
 ## Licence
 MIT
