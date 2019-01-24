@@ -23,6 +23,10 @@ class NimAddr {
             nimAddr = String(nimAddr);
         }
 
+        const firstChar = nimAddr.charAt(0);
+        if (firstChar === "/" || firstChar === ".") {
+            nimAddr = nimAddr.substr(1);
+        }
         const pRet = nimAddr.split(/[/.]+/);
         switch (pRet.length) {
             case 1:
@@ -57,6 +61,7 @@ class NimAddr {
         }
 
         if (baseAddr instanceof NimAddr) {
+            console.log(baseAddr);
             Object.assign(this, NimAddr.parse(addr), baseAddr, Object.create(DEFAULT_PROP));
         }
         else {
