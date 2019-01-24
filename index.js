@@ -3,7 +3,7 @@ const execa = require("execa");
 
 // Require Internal Dependencies
 const { taggedString } = require("./src/utils");
-const { NimAddr } = require("./src/nimAddr");
+const NimAddr = require("./src/nimAddr");
 
 // CONSTANTS
 const NIM_CMD = taggedString`${"path"} -u ${"login"} -p '${"password"}' ${"addr"} ${"callback"} `;
