@@ -1,6 +1,7 @@
 {
-    "extends": "@slimio/eslint-config",
-    "rules": {
-        "no-param-reassign": "off"
+    "extends": "@nodesecure/eslint-config",
+    "parserOptions": {
+        "sourceType": "module",
+        "requireConfigFile": false
     }
 }

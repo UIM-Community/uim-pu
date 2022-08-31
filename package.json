@@ -2,7 +2,8 @@
   "name": "@uim/pu",
   "version": "1.1.3",
   "description": "CA UIM - Node.js Probe Utility",
-  "main": "index.js",
+  "type": "module",
+  "exports": "./index.js",
   "private": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,18 +18,22 @@
     "ProbeUtility",
     "pu"
   ],
+  "files": [
+    "index.js",
+    "src"
+  ],
   "author": "Asynchronous SASU <gentilhomme.thomas@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/UIM-Community/uim_node_pu/issues"
   },
   "homepage": "https://github.com/UIM-Community/uim_node_pu#readme",
-  "dependencies": {
-    "execa": "^1.0.0"
-  },
   "devDependencies": {
-    "@slimio/eslint-config": "^2.0.3",
-    "@types/node": "^10.12.18",
-    "eslint": "^5.12.1"
+    "@nodesecure/eslint-config": "^1.5.0",
+    "@types/node": "^18.7.14",
+    "eslint": "^8.23.0"
+  },
+  "dependencies": {
+    "execa": "^6.1.0"
   }
 }
